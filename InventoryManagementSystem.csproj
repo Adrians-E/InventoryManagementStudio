@@ -99,6 +99,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hashing.cs" />
     <Compile Include="IInventoryManagementStudio.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -108,6 +109,12 @@
     <Compile Include="ProgramHelpers.cs" />
     <Compile Include="ProgramHelpersHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="registrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="registrationForm.Designer.cs">
+      <DependentUpon>registrationForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +130,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="registrationForm.resx">
+      <DependentUpon>registrationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

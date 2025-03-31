@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace InventoryManagementSystem
@@ -8,6 +9,8 @@ namespace InventoryManagementSystem
     public partial class Form1 : Form
     {
         private string connectionString = "Data Source=inventory.db;Version=3;";
+        string[] admins = {"admin", "admins"};
+        private string currentUser;
 
         public Form1()
         {
@@ -23,9 +26,9 @@ namespace InventoryManagementSystem
                 SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS inventory (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Origin TEXT, Category TEXT, Price TEXT, Description TEXT, Quantity TEXT)", conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
-            }
 
-            LoadData(); // Ielādē datus
+            }
+                LoadData(); // Ielādē datus
         }
 
         private void LoadData()
@@ -40,7 +43,10 @@ namespace InventoryManagementSystem
                 conn.Close();
             }
         }
-
+        public void saveUser(string user)
+        {
+           currentUser = user;
+        }
         private void saveButton_Click(object sender, EventArgs e)
         {
             string name = nameTextBox.Text;
@@ -86,6 +92,12 @@ namespace InventoryManagementSystem
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            if (!admins.Contains(currentUser.ToLower()))
+            {
+                MessageBox.Show("You don't have permissions for this command!", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (inventoryGridView.SelectedRows.Count > 0)
             {
                 int id = Convert.ToInt32(inventoryGridView.SelectedRows[0].Cells["Id"].Value);
